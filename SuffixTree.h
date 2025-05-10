@@ -13,15 +13,15 @@ private:
         int* end;
         int suffixLink;
 
-        Node(int start, int* end);
+        Node(int start, int* end) : start(start), end(end), suffixLink(0) {}
     };
 
-    std::string str;
+    std::string text;
     std::vector<Node> tree;
-    int size;
+    int n; // Dĺžka textu
     int* globalEnd;
 
-    // Aktívne premenné
+    // Premenné pre Ukkonenov algoritmus
     int activeNode;
     int activeEdge;
     int activeLength;
@@ -30,16 +30,15 @@ private:
 
     bool walkDown(int nextNode);
     void extendSuffixTree(int pos);
-    void preorder(int node) const;
+    void preorder(int node, int depth = 0) const;
     std::string edgeString(int node) const;
 
 public:
     SuffixTree();
     ~SuffixTree();
-
     void clear();
-    void build(const std::string& s);
-    bool find(const std::string& s) const;
+    void build(const std::string& str);
+    bool find(const std::string& str) const;
     void print() const;
 };
 
